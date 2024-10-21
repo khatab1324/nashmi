@@ -1,13 +1,13 @@
 import mongoose, { Schema } from "mongoose";
 
 const Sha7dahSchema = new Schema({
-    sha7daID: {Number, required: ture}, 
-    title: {String, unique: true},
+    sha7daID: {type: Number, required: true}, 
+    title: {type: String, unique: true},
     desc: String,
     imageURL: String,
-    collectedAmount: {Number, default: 0},
-    totalAmount: {Number, required: true},
-    category: {String, required: true},
+    collectedAmount: {type: Number, default: 0},
+    totalAmount: {type: Number, required: true},
+    category: {type: String, required: true},
     sha7daStatus: {type: String, enum: ['ongoing', 'complete'], default: 'ongoing'}
 });
 
