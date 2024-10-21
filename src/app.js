@@ -24,9 +24,31 @@ app.set("view engine", "ejs");
 app.use(router);
 app.use(authRouter);
 
-app.get("/", (req, res) => {
-  res.render("home.ejs");
+app.get("/",(req, res) => {
+  
+  res.render("home.ejs", { name: "khattab" });
 });
+
+app.get("/sha7dah",()=>{
+
+})
+app.get("/sha7dahitem",()=>{
+
+})
+app.get("/sha7dahitem/:id/edit")
+
+// app.get("/auth", (req, res) => {
+//   res.render("auth.ejs");
+// });
+
+// app.post("/signin", (req, res) => {
+//   res.redirect("/");
+// });
+
+// app.post("/signup", (req, res) => {
+//   res.redirect("/");
+// });
+
 app.all("/*", (req, res) => {
   res.send("the page not found");
 });
