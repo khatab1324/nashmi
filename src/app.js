@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 import mongoose from "mongoose";
 // routers
 import authRouter from "./routers/authRouter.js";
-
+import Sha7dah from "./models/sha7dahModel.js";
 mongoose
   .connect("mongodb://127.0.0.1:27017/nashmi")
   .then(() => {
@@ -24,18 +24,33 @@ app.set("view engine", "ejs");
 app.use(router);
 app.use(authRouter);
 
-app.get("/",(req, res) => {
-  
+app.get("/", (req, res) => {
   res.render("home.ejs", { name: "khattab" });
 });
 
-app.get("/sha7dah",()=>{
-
-})
-app.get("/sha7dahitem",()=>{
-
-})
-app.get("/sha7dahitem/:id/edit")
+app.get("/sha7dah", (req, res) => {});
+app.get("/sha7dahitem/:id", async (req, res) => {
+  const idFromParams = req.params.id;
+  try {
+    const sha7dahitem = await Sha7dah.findById(idFromParams);
+    console.log(sha7dahitem);
+  } catch (error) {
+    console.error(error);
+  }
+  res.send("hello");
+});
+app.post("/sha7dahitem/:id/create", async (req, res) => {
+  const sha7dahitem = await new Sha7dah({
+    title: "zkah",
+    category: "personal",
+    totalAmount: 1222,
+    sha7daStatus: "ongoing",
+  });
+  sha7dahitem.save();
+  res.send("item added");
+});
+app.post("/sha7dahitem/:id/edit", async (req, res) => {});
+app.post("/sha7dahitem/:id/delete", async (req, res) => {});
 
 // app.get("/auth", (req, res) => {
 //   res.render("auth.ejs");
